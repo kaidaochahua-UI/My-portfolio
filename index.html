@@ -1,328 +1,375 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2113">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #0000ff; -webkit-text-stroke: #0000ff}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #900112; -webkit-text-stroke: #900112}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; -webkit-text-stroke: #000000; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #0f7001; -webkit-text-stroke: #0f7001}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'PingFang SC'; color: #bf1c25; -webkit-text-stroke: #bf1c25}
-    span.s1 {font-kerning: none; color: #0000ff; background-color: #fffffe; -webkit-text-stroke: 0px #0000ff}
-    span.s2 {font-kerning: none; background-color: #fffffe}
-    span.s3 {font-kerning: none; color: #900112; background-color: #fffffe; -webkit-text-stroke: 0px #900112}
-    span.s4 {font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
-    span.s5 {font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
-    span.s6 {font-kerning: none}
-    span.s7 {font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
-    span.s8 {font: 12.0px 'PingFang SC'; font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
-    span.s9 {font: 12.0px Menlo; font-kerning: none; color: #000000; background-color: #fffffe; -webkit-text-stroke: 0px #000000}
-    span.s10 {font: 12.0px Menlo; font-kerning: none; color: #0e6e6d; background-color: #fffffe; -webkit-text-stroke: 0px #0e6e6d}
-    span.s11 {font: 12.0px 'PingFang SC'; font-kerning: none; background-color: #fffffe}
-    span.s12 {font: 12.0px Menlo; font-kerning: none; color: #137646; background-color: #fffffe; -webkit-text-stroke: 0px #137646}
-    span.s13 {font-kerning: none; color: #bf1c25; background-color: #fffffe; -webkit-text-stroke: 0px #bf1c25}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开到茶花 - UX Designer</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            bg: '#F4F4F0',
+            primary: '#111111',
+            secondary: '#666666',
+            border: '#E5E5E0',
+            accent: '#E8E8E4',
+          },
+          fontSize: {
+            huge: 'clamp(4rem, 12vw, 10rem)',
+            display: 'clamp(2.5rem, 6vw, 5rem)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      overflow-x: hidden;
+      background-color: #F4F4F0;
+      color: #111111;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background-color: #111111;
+      color: #F4F4F0;
+    }
+
+    /* Text Reveal Animation Prep */
+    .reveal-wrap { 
+      overflow: hidden; 
+    }
+    .reveal-text { 
+      transform: translateY(110%); 
+      opacity: 0; 
+      display: inline-block;
+      transform-origin: left top;
+    }
+
+    /* Image Hover Effect */
+    .project-img {
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover .project-img {
+        transform: scale(1.05);
+    }
+
+    /* Lenis Smooth Scroll */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-smooth iframe {
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">import</span><span class="s2"> { useEffect } </span><span class="s1">from</span><span class="s2"> </span><span class="s3">'react'</span><span class="s2">;</span></p>
-<p class="p2"><span class="s2">import</span><span class="s4"> gsap </span><span class="s2">from</span><span class="s4"> </span><span class="s3">'gsap'</span><span class="s4">;</span></p>
-<p class="p3"><span class="s1">import</span><span class="s4"> </span><span class="s5">ScrollTrigger</span><span class="s4"> </span><span class="s1">from</span><span class="s4"> </span><span class="s2">'gsap/ScrollTrigger'</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2">import</span><span class="s4"> </span><span class="s5">Lenis</span><span class="s4"> </span><span class="s2">from</span><span class="s4"> </span><span class="s3">'lenis'</span><span class="s4">;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2">gsap.registerPlugin(</span><span class="s5">ScrollTrigger</span><span class="s2">);</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p2"><span class="s2">export</span><span class="s4"> </span><span class="s2">default</span><span class="s4"> </span><span class="s2">function</span><span class="s4"> </span><span class="s5">App</span><span class="s4">() {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s2">// 1. Lenis Smooth Scroll Setup</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> lenis = </span><span class="s1">new</span><span class="s2"> </span><span class="s5">Lenis</span><span class="s2">({</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>duration: </span><span class="s7">1.2</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>easing: (t: </span><span class="s1">number</span><span class="s2">) =&gt; </span><span class="s5">Math</span><span class="s2">.min(</span><span class="s7">1</span><span class="s2">, </span><span class="s7">1.001</span><span class="s2"> - </span><span class="s5">Math</span><span class="s2">.pow(</span><span class="s7">2</span><span class="s2">, -</span><span class="s7">10</span><span class="s2"> * t)),</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>direction: </span><span class="s3">'vertical'</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>gestureDirection: </span><span class="s3">'vertical'</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>smooth: </span><span class="s1">true</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>mouseMultiplier: </span><span class="s7">1</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>smoothTouch: </span><span class="s1">false</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>touchMultiplier: </span><span class="s7">2</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>infinite: </span><span class="s1">false</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>} </span><span class="s1">as</span><span class="s2"> </span><span class="s1">any</span><span class="s2">);</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">function</span><span class="s2"> raf(time: </span><span class="s1">number</span><span class="s2">) {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>lenis.raf(time);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>requestAnimationFrame(raf);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>requestAnimationFrame(raf);</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>lenis.on(</span><span class="s3">'scroll'</span><span class="s2">, </span><span class="s5">ScrollTrigger</span><span class="s2">.update);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>gsap.ticker.add((time) =&gt; {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>lenis.raf(time * </span><span class="s7">1000</span><span class="s2">);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>gsap.ticker.lagSmoothing(</span><span class="s7">0</span><span class="s2">, </span><span class="s7">0</span><span class="s2">);</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s2">// 2. GSAP Text Reveal Animations</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> heroElements = document.querySelectorAll(</span><span class="s3">'.hero-reveal .reveal-text'</span><span class="s2">);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> scrollElements = document.querySelectorAll(</span><span class="s3">'.scroll-reveal .reveal-text'</span><span class="s2">);</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s2">// Hero Animation Timeline</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s2"> (heroElements.length &gt; </span><span class="s7">0</span><span class="s2">) {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>gsap.to(heroElements, {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>y: </span><span class="s7">0</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>opacity: </span><span class="s7">1</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>duration: </span><span class="s7">1.4</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>stagger: </span><span class="s7">0.15</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>ease: </span><span class="s3">"expo.out"</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>delay: </span><span class="s7">0.2</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s2">// Scroll Reveal Animations</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>scrollElements.forEach((el) =&gt; {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>gsap.to(el, {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>y: </span><span class="s7">0</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>opacity: </span><span class="s7">1</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>duration: </span><span class="s7">1.4</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>ease: </span><span class="s3">"expo.out"</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>scrollTrigger: {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>trigger: el.parentElement,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>start: </span><span class="s3">"top 95%"</span><span class="s2">,</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>toggleActions: </span><span class="s3">"play none none reverse"</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> () =&gt; {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>lenis.destroy();</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>gsap.ticker.remove((time) =&gt; {</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>lenis.raf(time * </span><span class="s7">1000</span><span class="s2">);</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>});</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>}, []);</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p2"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s4"> (</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;&gt;</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">      </span>{</span><span class="s2">/* Navigation */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span>&lt;nav className=</span><span class="s2">"fixed top-0 left-0 w-full z-40 px-6 py-6 flex justify-between items-center text-sm font-medium bg-bg/80 backdrop-blur-md border-b border-border/50"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"font-serif italic text-xl tracking-tight"</span><span class="s4">&gt;</span><span class="s8">开到茶花</span><span class="s4">&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s3">"hidden md:flex gap-8"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;a href=</span><span class="s2">"#works"</span><span class="s4"> className=</span><span class="s2">"hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s8">作品</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;a href=</span><span class="s2">"#expertise"</span><span class="s4"> className=</span><span class="s2">"hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s8">专业</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;a href=</span><span class="s2">"#about"</span><span class="s4"> className=</span><span class="s2">"hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s8">关于</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;a href=</span><span class="s2">"#contact"</span><span class="s4"> className=</span><span class="s2">"hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s8">联系</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/nav&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span>&lt;main className=</span><span class="s2">"px-6 md:px-12 max-w-[1400px] mx-auto"</span><span class="s4">&gt;</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Hero Section */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;section className=</span><span class="s2">"min-h-screen flex flex-col justify-center pb-12 pt-32"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex flex-col gap-2 md:gap-4"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s3">"reveal-wrap hero-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h1 className=</span><span class="s2">"reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s5">A</span><span class="s2"> </span><span class="s5">Senior</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s3">"reveal-wrap hero-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h1 className=</span><span class="s2">"reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"font-serif italic text-secondary font-light"</span><span class="s4">&gt;</span><span class="s5">UX</span><span class="s4"> </span><span class="s5">Designer</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s3">"reveal-wrap hero-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h1 className=</span><span class="s2">"reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>you can count on.</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8 pt-12 mt-16 border-t border-border"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"md:col-span-4 text-secondary text-xs uppercase tracking-[0.2em] reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s3">"reveal-text font-medium mt-2"</span><span class="s2">&gt;</span><span class="s8">开到茶花</span><span class="s2">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"md:col-span-8 reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s2">"reveal-text text-xl md:text-3xl font-light text-secondary leading-relaxed max-w-3xl"</span><span class="s4">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                </span></span><span class="s2">打造兼具功能与美感的数字体验。从千万级日活的</span><span class="s10">C</span><span class="s2">端产品到复杂的智能座舱，我致力于将商业增长与用户情感完美连接。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Portfolio Section */</span><span class="s4">}</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;section id=</span><span class="s3">"works"</span><span class="s2"> className=</span><span class="s3">"py-24 md:py-32"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"reveal-wrap scroll-reveal mb-16"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;h2 className=</span><span class="s2">"reveal-text text-3xl md:text-5xl font-medium tracking-tight"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s5">Tiny</span><span class="s2"> fraction </span><span class="s1">of</span><span class="s2"> my &lt;span className=</span><span class="s3">"font-serif italic text-secondary"</span><span class="s2">&gt;work&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s3">"space-y-24 md:space-y-32"</span><span class="s2">&gt;</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span>{</span><span class="s2">/* Project 1 */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;article className=</span><span class="s2">"project-card group cursor-pointer"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;a href=</span><span class="s2">"https://www.zcool.com.cn/u/14211505"</span><span class="s4"> target=</span><span class="s2">"_blank"</span><span class="s4"> rel=</span><span class="s2">"noopener noreferrer"</span><span class="s4"> className=</span><span class="s2">"overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;img src=</span><span class="s2">"https://s41.ax1x.com/2026/03/28/pe1Knts.png"</span><span class="s4"> alt=</span><span class="s2">"</span><span class="s11">微软智能存储柜</span><span class="s2">"</span><span class="s4"> className=</span><span class="s2">"project-img w-full h-full object-cover"</span><span class="s4"> referrerPolicy=</span><span class="s2">"no-referrer"</span><span class="s4"> /&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"md:col-span-5"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s2">"text-3xl md:text-5xl font-serif italic tracking-tight mb-6"</span><span class="s4">&gt;</span><span class="s8">微软智能存储柜</span><span class="s4">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s3">"flex flex-wrap gap-2"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">界面设计</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">智能硬件</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"md:col-span-7 flex flex-col justify-between"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6"</span><span class="s4">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                    </span></span><span class="s2">为微软制作的一套智能存储服务柜界面设计方向，甲方给的需求内容比较基础，因此在设计中尝试了很多方案，探索软硬件结合的无缝体验。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/article&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span>{</span><span class="s2">/* Project 2 */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;article className=</span><span class="s2">"project-card group cursor-pointer"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;a href=</span><span class="s2">"https://www.zcool.com.cn/u/14211505"</span><span class="s4"> target=</span><span class="s2">"_blank"</span><span class="s4"> rel=</span><span class="s2">"noopener noreferrer"</span><span class="s4"> className=</span><span class="s2">"overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;img src=</span><span class="s2">"https://s41.ax1x.com/2026/03/28/pe1Kmkj.png"</span><span class="s4"> alt=</span><span class="s2">"</span><span class="s11">项目</span><span class="s2"> 2"</span><span class="s4"> className=</span><span class="s2">"project-img w-full h-full object-cover"</span><span class="s4"> referrerPolicy=</span><span class="s2">"no-referrer"</span><span class="s4"> /&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"md:col-span-5"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s2">"text-3xl md:text-5xl font-serif italic tracking-tight mb-6"</span><span class="s4">&gt;</span><span class="s8">企业级视觉体系</span><span class="s4">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s3">"flex flex-wrap gap-2"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">品牌塑造</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">视觉设计</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"md:col-span-7 flex flex-col justify-between"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6"</span><span class="s4">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                    </span></span><span class="s2">为高营收产品定义品牌基因与视觉策略。从</span><span class="s12">0</span><span class="s2">到</span><span class="s12">1</span><span class="s2">打造极具辨识度的视觉符号，赋能市场营销并驱动产品增长。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/article&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span>{</span><span class="s2">/* Project 3 */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;article className=</span><span class="s2">"project-card group cursor-pointer"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;a href=</span><span class="s2">"https://www.zcool.com.cn/u/14211505"</span><span class="s4"> target=</span><span class="s2">"_blank"</span><span class="s4"> rel=</span><span class="s2">"noopener noreferrer"</span><span class="s4"> className=</span><span class="s2">"overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;img src=</span><span class="s2">"https://s41.ax1x.com/2026/03/28/pe1KQ10.png"</span><span class="s4"> alt=</span><span class="s2">"</span><span class="s11">项目</span><span class="s2"> 3"</span><span class="s4"> className=</span><span class="s2">"project-img w-full h-full object-cover"</span><span class="s4"> referrerPolicy=</span><span class="s2">"no-referrer"</span><span class="s4"> /&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"md:col-span-5"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s2">"text-3xl md:text-5xl font-serif italic tracking-tight mb-6"</span><span class="s4">&gt;</span><span class="s8">士气基地小程序设计</span><span class="s4">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s3">"flex flex-wrap gap-2"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">人机交互</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s2">"px-4 py-1.5 rounded-full border border-border text-sm text-secondary"</span><span class="s4">&gt;</span><span class="s8">跨端体验</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"md:col-span-7 flex flex-col justify-between"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6"</span><span class="s4">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                    </span></span><span class="s2">士气基地是面向学员圈子的交流互动学习小程序。设计依然贯穿了士气品牌的核心视觉系统，适配移动端体验设计</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/article&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Expertise Section */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;section id=</span><span class="s2">"expertise"</span><span class="s4"> className=</span><span class="s2">"py-24 md:py-32 border-t border-border"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"md:col-span-4 reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h2 className=</span><span class="s2">"reveal-text text-3xl md:text-5xl font-medium tracking-tight mb-6"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s5">I</span><span class="s2">'ve got your &lt;span className="font-serif italic text-secondary"&gt;back&lt;/span&gt; with...</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s3">"md:col-span-8"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"reveal-wrap scroll-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s3">"reveal-text text-xl font-medium mb-4"</span><span class="s2">&gt;</span><span class="s8">全链路体验设计</span><span class="s2">&lt;/h3&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"reveal-text text-secondary font-light leading-relaxed"</span><span class="s4">&gt;</span><span class="s8">涵盖产品分析、指标定义及全流程交互设计。通过数据驱动的复盘推动设计迭代。</span><span class="s4">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"reveal-wrap scroll-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s3">"reveal-text text-xl font-medium mb-4"</span><span class="s2">&gt;</span><span class="s8">视觉与品牌表达</span><span class="s2">&lt;/h3&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"reveal-text text-secondary font-light leading-relaxed"</span><span class="s4">&gt;</span><span class="s8">精心打磨图形、</span><span class="s5">UI</span><span class="s8">布局、插画及超级符号，使其与产品的核心基因完美契合。</span><span class="s4">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"reveal-wrap scroll-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s3">"reveal-text text-xl font-medium mb-4"</span><span class="s2">&gt;</span><span class="s8">设计咨询与管理</span><span class="s2">&lt;/h3&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"reveal-text text-secondary font-light leading-relaxed"</span><span class="s4">&gt;</span><span class="s8">提供设计评审，优化上下游协作流程，管理</span><span class="s5">UED</span><span class="s8">团队并制定</span><span class="s5">OKRs</span><span class="s8">。</span><span class="s4">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s3">"reveal-wrap scroll-reveal"</span><span class="s2">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s3">"reveal-text text-xl font-medium mb-4"</span><span class="s2">&gt;</span><span class="s8">跨平台体验探索</span><span class="s2">&lt;/h3&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"reveal-text text-secondary font-light leading-relaxed"</span><span class="s4">&gt;</span><span class="s8">为智能座舱、移动应用及响应式</span><span class="s5">Web</span><span class="s8">平台提供定制化的交互解决方案。</span><span class="s4">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* About Section */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;section id=</span><span class="s2">"about"</span><span class="s4"> className=</span><span class="s2">"py-24 md:py-32 border-t border-border"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-12 gap-8"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"md:col-span-4 reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h2 className=</span><span class="s2">"reveal-text text-3xl md:text-5xl font-medium tracking-tight mb-6"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s5">Behind</span><span class="s2"> the &lt;span className=</span><span class="s3">"font-serif italic text-secondary"</span><span class="s2">&gt;pixels&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s3">"md:col-span-8"</span><span class="s2">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"reveal-wrap scroll-reveal mb-12"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;h3 className=</span><span class="s2">"reveal-text text-2xl md:text-4xl font-medium leading-tight tracking-tight"</span><span class="s4">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                  </span></span><span class="s2">设计哲学：在复杂的商业逻辑中，寻找最自然、最精准的绽放点。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">              </span></span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"prose prose-lg text-secondary font-light max-w-none reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;p className=</span><span class="s3">"reveal-text mb-6"</span><span class="s2">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                  </span></span><span class="s2">无论是带领十人团队制定</span><span class="s10">OKR</span><span class="s2">与绩效指标，还是在初创期单枪匹马负责整个设计链路，我的核心始终如一：高效协作与完美执行。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;p className=</span><span class="s3">"reveal-text"</span><span class="s2">&gt;</span></p>
-<p class="p6"><span class="s9"><span class="Apple-converted-space">                  </span></span><span class="s2">我相信优秀的设计总是大象无形。它不应喧宾夺主，而应在潜移默化中引导用户，同时悄无声息地达成商业目标。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">              </span></span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"mt-12 flex flex-wrap gap-3 reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary"</span><span class="s4">&gt;</span><span class="s8">高级</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary"</span><span class="s4">&gt;</span><span class="s8">有趣</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary"</span><span class="s4">&gt;</span><span class="s8">极简</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Contact Section */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;section id=</span><span class="s2">"contact"</span><span class="s4"> className=</span><span class="s2">"py-24 md:py-40 border-t border-border flex flex-col items-center justify-center text-center"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"reveal-wrap scroll-reveal mb-8"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;p className=</span><span class="s2">"reveal-text text-secondary uppercase tracking-widest text-sm font-medium"</span><span class="s4">&gt;</span><span class="s8">准备好开始了吗？</span><span class="s4">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;a href=</span><span class="s2">"mailto:hello@yourdomain.com"</span><span class="s4"> className=</span><span class="s2">"inline-block group"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">              </span>&lt;h2 className=</span><span class="s2">"reveal-text text-display md:text-huge font-medium tracking-tight group-hover:text-secondary transition-colors duration-500"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s5">Get</span><span class="s4"> </span><span class="s1">in</span><span class="s4"> &lt;span className=</span><span class="s2">"font-serif italic text-secondary group-hover:text-primary transition-colors duration-500"</span><span class="s4">&gt;touch&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex flex-wrap justify-center gap-8 mt-16 reveal-wrap scroll-reveal"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;a href=</span><span class="s2">"https://dribbble.com/CHAHUA"</span><span class="s4"> target=</span><span class="s2">"_blank"</span><span class="s4"> rel=</span><span class="s2">"noreferrer"</span><span class="s4"> className=</span><span class="s2">"reveal-text text-lg font-medium hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s5">Dribbble</span><span class="s4"> </span><span class="s13">↗</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;a href=</span><span class="s2">"https://www.zcool.com.cn/u/14211505"</span><span class="s4"> target=</span><span class="s2">"_blank"</span><span class="s4"> rel=</span><span class="s2">"noreferrer"</span><span class="s4"> className=</span><span class="s2">"reveal-text text-lg font-medium hover:text-secondary transition-colors"</span><span class="s4">&gt;</span><span class="s8">站酷</span><span class="s4"> </span><span class="s13">↗</span><span class="s4">&lt;/a&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;span className=</span><span class="s2">"reveal-text text-lg font-medium text-secondary"</span><span class="s4">&gt;</span><span class="s8">小红书</span><span class="s4">: </span><span class="s8">开到茶花</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span>&lt;span className=</span><span class="s2">"reveal-text text-lg font-medium text-secondary"</span><span class="s4">&gt;</span><span class="s8">微信</span><span class="s4">: </span><span class="s8">开到茶花</span><span class="s4">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Footer */</span><span class="s4">}</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span>&lt;footer className=</span><span class="s2">"py-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"</span><span class="s4">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s2">"text-secondary text-sm font-medium"</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&amp;copy; </span><span class="s7">2026</span><span class="s2"> </span><span class="s8">开到茶花</span><span class="s2">. </span><span class="s8">保留所有权利。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s3">"text-secondary text-sm"</span><span class="s2">&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s8">用心设计。</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</span></p>
-<p class="p4"><span class="s6"></span><br></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/main&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
-<p class="p1"><span class="s2">}</span></p>
-<p class="p4"><span class="s6"></span><br></p>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-40 px-6 py-6 flex justify-between items-center text-sm font-medium bg-bg/80 backdrop-blur-md border-b border-border/50">
+    <div class="font-serif italic text-xl tracking-tight">开到茶花</div>
+    <div class="hidden md:flex gap-8">
+      <a href="#works" class="hover:text-secondary transition-colors">作品</a>
+      <a href="#expertise" class="hover:text-secondary transition-colors">专业</a>
+      <a href="#about" class="hover:text-secondary transition-colors">关于</a>
+      <a href="#contact" class="hover:text-secondary transition-colors">联系</a>
+    </div>
+  </nav>
+
+  <main class="px-6 md:px-12 max-w-[1400px] mx-auto">
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center pb-12 pt-32">
+      <div class="flex flex-col gap-2 md:gap-4">
+        <div class="reveal-wrap hero-reveal">
+          <h1 class="reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter">
+            A Senior
+          </h1>
+        </div>
+        <div class="reveal-wrap hero-reveal">
+          <h1 class="reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter">
+            <span class="font-serif italic text-secondary font-light">UX Designer</span>
+          </h1>
+        </div>
+        <div class="reveal-wrap hero-reveal">
+          <h1 class="reveal-text text-display md:text-huge font-medium leading-[0.9] tracking-tighter">
+            you can count on.
+          </h1>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-12 mt-16 border-t border-border">
+        <div class="md:col-span-4 text-secondary text-xs uppercase tracking-[0.2em] reveal-wrap scroll-reveal">
+          <p class="reveal-text font-medium mt-2">开到茶花</p>
+        </div>
+        <div class="md:col-span-8 reveal-wrap scroll-reveal">
+          <p class="reveal-text text-xl md:text-3xl font-light text-secondary leading-relaxed max-w-3xl">
+            打造兼具功能与美感的数字体验。从千万级日活的C端产品到复杂的智能座舱，我致力于将商业增长与用户情感完美连接。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="works" class="py-24 md:py-32">
+      <div class="reveal-wrap scroll-reveal mb-16">
+        <h2 class="reveal-text text-3xl md:text-5xl font-medium tracking-tight">
+          Tiny fraction of my <span class="font-serif italic text-secondary">work</span>
+        </h2>
+      </div>
+
+      <div class="space-y-24 md:space-y-32">
+        <!-- Project 1 -->
+        <article class="project-card group cursor-pointer">
+          <a href="https://www.zcool.com.cn/u/14211505" target="_blank" rel="noopener noreferrer" class="overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block">
+            <img src="https://s41.ax1x.com/2026/03/28/pe1Knts.png" alt="微软智能存储柜" class="project-img w-full h-full object-cover" referrerpolicy="no-referrer" />
+          </a>
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-5">
+              <h3 class="text-3xl md:text-5xl font-serif italic tracking-tight mb-6">微软智能存储柜</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">界面设计</span>
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">智能硬件</span>
+              </div>
+            </div>
+            <div class="md:col-span-7 flex flex-col justify-between">
+              <p class="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6">
+                为微软制作的一套智能存储服务柜界面设计方向，甲方给的需求内容比较基础，因此在设计中尝试了很多方案，探索软硬件结合的无缝体验。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card group cursor-pointer">
+          <a href="https://www.zcool.com.cn/u/14211505" target="_blank" rel="noopener noreferrer" class="overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block">
+            <img src="https://s41.ax1x.com/2026/03/28/pe1Kmkj.png" alt="项目 2" class="project-img w-full h-full object-cover" referrerpolicy="no-referrer" />
+          </a>
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-5">
+              <h3 class="text-3xl md:text-5xl font-serif italic tracking-tight mb-6">企业级视觉体系</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">品牌塑造</span>
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">视觉设计</span>
+              </div>
+            </div>
+            <div class="md:col-span-7 flex flex-col justify-between">
+              <p class="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6">
+                为高营收产品定义品牌基因与视觉策略。从0到1打造极具辨识度的视觉符号，赋能市场营销并驱动产品增长。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card group cursor-pointer">
+          <a href="https://www.zcool.com.cn/u/14211505" target="_blank" rel="noopener noreferrer" class="overflow-hidden bg-accent aspect-[4/3] md:aspect-[16/9] w-full mb-12 relative block">
+            <img src="https://s41.ax1x.com/2026/03/28/pe1KQ10.png" alt="项目 3" class="project-img w-full h-full object-cover" referrerpolicy="no-referrer" />
+          </a>
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-5">
+              <h3 class="text-3xl md:text-5xl font-serif italic tracking-tight mb-6">士气基地小程序设计</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">人机交互</span>
+                <span class="px-4 py-1.5 rounded-full border border-border text-sm text-secondary">跨端体验</span>
+              </div>
+            </div>
+            <div class="md:col-span-7 flex flex-col justify-between">
+              <p class="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-6">
+                士气基地是面向学员圈子的交流互动学习小程序。设计依然贯穿了士气品牌的核心视觉系统，适配移动端体验设计
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-24 md:py-32 border-t border-border">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-4 reveal-wrap scroll-reveal">
+          <h2 class="reveal-text text-3xl md:text-5xl font-medium tracking-tight mb-6">
+            I've got your <span class="font-serif italic text-secondary">back</span> with...
+          </h2>
+        </div>
+        <div class="md:col-span-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+            <div class="reveal-wrap scroll-reveal">
+              <h3 class="reveal-text text-xl font-medium mb-4">全链路体验设计</h3>
+              <p class="reveal-text text-secondary font-light leading-relaxed">涵盖产品分析、指标定义及全流程交互设计。通过数据驱动的复盘推动设计迭代。</p>
+            </div>
+            <div class="reveal-wrap scroll-reveal">
+              <h3 class="reveal-text text-xl font-medium mb-4">视觉与品牌表达</h3>
+              <p class="reveal-text text-secondary font-light leading-relaxed">精心打磨图形、UI布局、插画及超级符号，使其与产品的核心基因完美契合。</p>
+            </div>
+            <div class="reveal-wrap scroll-reveal">
+              <h3 class="reveal-text text-xl font-medium mb-4">设计咨询与管理</h3>
+              <p class="reveal-text text-secondary font-light leading-relaxed">提供设计评审，优化上下游协作流程，管理UED团队并制定OKRs。</p>
+            </div>
+            <div class="reveal-wrap scroll-reveal">
+              <h3 class="reveal-text text-xl font-medium mb-4">跨平台体验探索</h3>
+              <p class="reveal-text text-secondary font-light leading-relaxed">为智能座舱、移动应用及响应式Web平台提供定制化的交互解决方案。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 border-t border-border">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-4 reveal-wrap scroll-reveal">
+          <h2 class="reveal-text text-3xl md:text-5xl font-medium tracking-tight mb-6">
+            Behind the <span class="font-serif italic text-secondary">pixels</span>
+          </h2>
+        </div>
+        <div class="md:col-span-8">
+          <div class="reveal-wrap scroll-reveal mb-12">
+            <h3 class="reveal-text text-2xl md:text-4xl font-medium leading-tight tracking-tight">
+              设计哲学：在复杂的商业逻辑中，寻找最自然、最精准的绽放点。
+            </h3>
+          </div>
+          
+          <div class="prose prose-lg text-secondary font-light max-w-none reveal-wrap scroll-reveal">
+            <p class="reveal-text mb-6">
+              无论是带领十人团队制定OKR与绩效指标，还是在初创期单枪匹马负责整个设计链路，我的核心始终如一：高效协作与完美执行。
+            </p>
+            <p class="reveal-text">
+              我相信优秀的设计总是大象无形。它不应喧宾夺主，而应在潜移默化中引导用户，同时悄无声息地达成商业目标。
+            </p>
+          </div>
+          
+          <div class="mt-12 flex flex-wrap gap-3 reveal-wrap scroll-reveal">
+            <span class="reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary">高级</span>
+            <span class="reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary">有趣</span>
+            <span class="reveal-text px-6 py-2 rounded-full border border-border text-sm font-medium text-secondary">极简</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-40 border-t border-border flex flex-col items-center justify-center text-center">
+      <div class="reveal-wrap scroll-reveal mb-8">
+        <p class="reveal-text text-secondary uppercase tracking-widest text-sm font-medium">准备好开始了吗？</p>
+      </div>
+      
+      <div class="reveal-wrap scroll-reveal">
+        <a href="mailto:hello@yourdomain.com" class="inline-block group">
+          <h2 class="reveal-text text-display md:text-huge font-medium tracking-tight group-hover:text-secondary transition-colors duration-500">
+            Get in <span class="font-serif italic text-secondary group-hover:text-primary transition-colors duration-500">touch</span>
+          </h2>
+        </a>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-8 mt-16 reveal-wrap scroll-reveal">
+        <a href="https://dribbble.com/CHAHUA" target="_blank" rel="noreferrer" class="reveal-text text-lg font-medium hover:text-secondary transition-colors">Dribbble ↗</a>
+        <a href="https://www.zcool.com.cn/u/14211505" target="_blank" rel="noreferrer" class="reveal-text text-lg font-medium hover:text-secondary transition-colors">站酷 ↗</a>
+        <span class="reveal-text text-lg font-medium text-secondary">小红书: 开到茶花</span>
+        <span class="reveal-text text-lg font-medium text-secondary">微信: 开到茶花</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-secondary text-sm font-medium">
+        &copy; 2026 开到茶花. 保留所有权利。
+      </p>
+      <p class="text-secondary text-sm">
+        用心设计。
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Lenis Smooth Scroll Setup
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0, 0);
+
+      // 2. GSAP Text Reveal Animations
+      const heroElements = document.querySelectorAll('.hero-reveal .reveal-text');
+      const scrollElements = document.querySelectorAll('.scroll-reveal .reveal-text');
+      
+      // Hero Animation Timeline
+      if (heroElements.length > 0) {
+        gsap.to(heroElements, {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: "expo.out",
+          delay: 0.2
+        });
+      }
+
+      // Scroll Reveal Animations
+      scrollElements.forEach((el) => {
+        gsap.to(el, {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: el.parentElement,
+            start: "top 95%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
